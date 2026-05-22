@@ -20,9 +20,9 @@ AADAADADDA
 
 ## Building
 
-1. First clone the repo : git clone 
-2. Compile the project : mvn clean compile
-3. Create a input.txt file and put it at the root of the project
+1. First clone the repo : git clone https://github.com/DiazAntoine/solent-backend-test.git
+2. Create a input.txt file and put it at the root of the project
+3. Compile the project : mvn clean compile
 4. Launch the application : mvn exec:java -Dexec.mainClass="com.diaz.mowitnow.MowItNowApplication" -Dexec.args="input.txt"
 
 ## What is missing 
