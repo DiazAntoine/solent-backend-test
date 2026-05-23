@@ -24,7 +24,7 @@ public class MowingPlanExecutor {
     public List<Mower> executeMowingPlan (MowingPlan mowingPlan) {
         MowingActionExecutor mowingActionexecutor = new MowingActionExecutor(mowingPlan.lawn());
         return mowingPlan.programs().stream()
-                .map(program -> mowingActionexecutor.execute(program.coordinates(), program.orientation(), program.actions()))
+                .map(program -> mowingActionexecutor.execute(program.position(), program.orientation(), program.actions()))
                 .toList();
     }
 }

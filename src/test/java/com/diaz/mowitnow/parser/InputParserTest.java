@@ -2,7 +2,7 @@ package com.diaz.mowitnow.parser;
 
 import com.diaz.mowitnow.exception.InvalidInputException;
 import com.diaz.mowitnow.model.Action;
-import com.diaz.mowitnow.model.Coordinates;
+import com.diaz.mowitnow.model.Position;
 import com.diaz.mowitnow.model.Orientation;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -42,9 +42,10 @@ class InputParserTest {
 
         MowingPlan result = parser.parseInput(file);
 
-        assertEquals(new Coordinates(5, 5), result.lawn().upperRightCorner());
+        assertEquals(5, result.lawn().maxX());
+        assertEquals(5, result.lawn().maxY());
         assertEquals(1, result.programs().size());
-        assertEquals(new Coordinates(1, 2), result.programs().get(0).coordinates());
+        assertEquals(new Position(1, 2), result.programs().get(0).position());
         assertEquals(Orientation.N, result.programs().get(0).orientation());
     }
 
@@ -136,7 +137,7 @@ class InputParserTest {
 
         InvalidInputException exception = assertThrows(InvalidInputException.class, () -> parser.parseInput(file));
 
-        assertEquals("Initial mower position is outside the lawn: Coordinates[x=6, y=2]", exception.getMessage());
+        assertEquals("Initial mower position is outside the lawn: Position[x=6, y=2]", exception.getMessage());
     }
 
     @Test
@@ -164,16 +165,17 @@ class InputParserTest {
 
         MowingPlan result = parser.parseInput(file);
 
-        assertEquals(new Coordinates(5, 5), result.lawn().upperRightCorner());
+        assertEquals(5, result.lawn().maxX());
+        assertEquals(5, result.lawn().maxY());
         assertEquals(2, result.programs().size());
 
         MowingPlan.MowerProgram firstProgram = result.programs().get(0);
-        assertEquals(new Coordinates(1, 2), firstProgram.coordinates());
+        assertEquals(new Position(1, 2), firstProgram.position());
         assertEquals(Orientation.N, firstProgram.orientation());
         assertEquals(List.of(Action.G, Action.A, Action.G, Action.A, Action.G, Action.A, Action.G, Action.A, Action.A), firstProgram.actions());
 
         MowingPlan.MowerProgram secondProgram = result.programs().get(1);
-        assertEquals(new Coordinates(3, 3), secondProgram.coordinates());
+        assertEquals(new Position(3, 3), secondProgram.position());
         assertEquals(Orientation.E, secondProgram.orientation());
         assertEquals(List.of(Action.A, Action.A, Action.D, Action.A, Action.A, Action.D, Action.A, Action.D, Action.D, Action.A), secondProgram.actions());
     }

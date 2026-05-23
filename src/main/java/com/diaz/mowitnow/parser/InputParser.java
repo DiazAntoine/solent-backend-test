@@ -1,10 +1,7 @@
 package com.diaz.mowitnow.parser;
 
 import com.diaz.mowitnow.exception.InvalidInputException;
-import com.diaz.mowitnow.model.Action;
-import com.diaz.mowitnow.model.Coordinates;
-import com.diaz.mowitnow.model.Lawn;
-import com.diaz.mowitnow.model.Orientation;
+import com.diaz.mowitnow.model.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -73,13 +70,13 @@ public class InputParser {
         if (x < 0 || y < 0) {
             throw new InvalidInputException("Coordinates of the lawn must be positive or zero");
         }
-        return new Lawn(new Coordinates(x, y));
+        return new Lawn(x, y);
     }
 
     /**
      * Parses the lines for the position and actions of mowers.
      *
-     * <p>Reads lines in pairs. First parses the coordinates and orientation of a mower,
+     * <p>Reads lines in pairs. First parses the position and orientation of a mower,
      * then its actions, and store them into a MowerProgram. </p>
      *
      * @param meaningfulLines the lines to parse
@@ -96,14 +93,14 @@ public class InputParser {
                 throw new InvalidInputException("Mower position line must match: x y orientation");
             }
             Orientation orientation = createOrientation(parts[2]);
-            Coordinates coordinates = new Coordinates(parseInt(parts[0]), parseInt(parts[1]));
+            Position position = new Position(parseInt(parts[0]), parseInt(parts[1]));
 
-            if (!lawn.isWithinBounds(coordinates)) {
-                throw new InvalidInputException("Initial mower position is outside the lawn: " + coordinates);
+            if (!lawn.isWithinBounds(position)) {
+                throw new InvalidInputException("Initial mower position is outside the lawn: " + position);
             }
 
             List<Action> actions = parseActions(meaningfulLines.get(index + 1));
-            mowerPrograms.add(new MowingPlan.MowerProgram(coordinates, orientation, actions));
+            mowerPrograms.add(new MowingPlan.MowerProgram(position, orientation, actions));
         }
 
         return mowerPrograms;

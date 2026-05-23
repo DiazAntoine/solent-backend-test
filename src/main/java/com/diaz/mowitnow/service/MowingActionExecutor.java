@@ -1,10 +1,6 @@
 package com.diaz.mowitnow.service;
 
-import com.diaz.mowitnow.model.Action;
-import com.diaz.mowitnow.model.Coordinates;
-import com.diaz.mowitnow.model.Lawn;
-import com.diaz.mowitnow.model.Mower;
-import com.diaz.mowitnow.model.Orientation;
+import com.diaz.mowitnow.model.*;
 
 import java.util.List;
 
@@ -28,13 +24,13 @@ public class MowingActionExecutor {
     /**
      * Executes all actions of a mowing plan for a single mower sequentially.
      *
-     * @param coordinates the coordinates of the mower
+     * @param position the position of the mower
      * @param orientation the orientation of the mower
      * @param actions the action that must be executed by the mower
      * @return the final state of the mower after executing all actions
      */
-    public Mower execute(Coordinates coordinates, Orientation orientation, List<Action> actions) {
-        Mower mower = new Mower(coordinates, orientation);
+    public Mower execute(Position position, Orientation orientation, List<Action> actions) {
+        Mower mower = new Mower(position, orientation);
         actions.forEach(instruction -> execute(mower, instruction));
         return mower;
     }
@@ -56,7 +52,7 @@ public class MowingActionExecutor {
             case D -> mower.turnRight();
             case G -> mower.turnLeft();
             case A -> {
-                Coordinates nextPosition = mower.nextForwardPosition();
+                Position nextPosition = mower.nextForwardPosition();
                 if (lawn.isWithinBounds(nextPosition)) {
                     mower.moveTo(nextPosition);
                 }

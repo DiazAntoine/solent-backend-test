@@ -7,20 +7,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LawnTest {
 
-    private final Lawn lawn = new Lawn(new Coordinates(5, 5));
+    private final Lawn lawn = new Lawn(5, 5);
 
     @Test
-    void should_accept_coordinates_inside_lawn() {
-        assertTrue(lawn.isWithinBounds(new Coordinates(0, 0)));
-        assertTrue(lawn.isWithinBounds(new Coordinates(3, 4)));
-        assertTrue(lawn.isWithinBounds(new Coordinates(5, 5)));
+    void should_accept_position_inside_lawn() {
+        assertTrue(lawn.isWithinBounds(new Position(0, 0)));
+        assertTrue(lawn.isWithinBounds(new Position(3, 4)));
+        assertTrue(lawn.isWithinBounds(new Position(5, 5)));
     }
 
     @Test
-    void should_reject_coordinates_outside_lawn() {
-        assertFalse(lawn.isWithinBounds(new Coordinates(-1, 0)));
-        assertFalse(lawn.isWithinBounds(new Coordinates(0, -1)));
-        assertFalse(lawn.isWithinBounds(new Coordinates(6, 5)));
-        assertFalse(lawn.isWithinBounds(new Coordinates(5, 6)));
+    void should_reject_position_outside_lawn() {
+        assertFalse(lawn.isWithinBounds(new Position(-1, 0)));
+        assertFalse(lawn.isWithinBounds(new Position(0, -1)));
+        assertFalse(lawn.isWithinBounds(new Position(6, 5)));
+        assertFalse(lawn.isWithinBounds(new Position(5, 6)));
     }
 }

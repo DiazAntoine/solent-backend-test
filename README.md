@@ -29,4 +29,4 @@ AADAADADDA
 
 - Implementing a Command Pattern for Action execution in MowingActionExecutor (debatable).
 - Instead of returning a Mower, the MowingPlanExecutor could return a MowingResult.
-- Should prevent the creation of a mower at coordinates already taken + should prevent a lawnmower from going to coordinates already taken.
+- Should prevent the creation of a mower at position already taken + should prevent a lawnmower from going to position already taken.

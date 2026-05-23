@@ -5,16 +5,16 @@ package com.diaz.mowitnow.model;
  */
 public final class Mower {
 
-    private Coordinates coordinates;
+    private Position position;
     private Orientation orientation;
 
-    public Mower(Coordinates coordinates, Orientation orientation) {
-        this.coordinates = coordinates;
+    public Mower(Position position, Orientation orientation) {
+        this.position = position;
         this.orientation = orientation;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public Position getPosition() {
+        return position;
     }
 
 
@@ -37,22 +37,22 @@ public final class Mower {
     }
 
     /**
-     * Give the resulting coordinates of a forward movement
+     * Give the resulting Position of a forward movement
      */
-    public Coordinates nextForwardPosition() {
-        return coordinates.move(orientation);
+    public Position nextForwardPosition() {
+        return position.move(orientation);
     }
 
     /**
-     * Move the mower to the given coodinates.
-     * @param coordinates The coordinates to move to
+     * Move the mower to the given Position.
+     * @param position The Position to move to
      */
-    public void moveTo(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public void moveTo(Position position) {
+        this.position = position;
     }
 
     @Override
     public String toString() {
-        return coordinates.x() + " " + coordinates.y() + " " + orientation + " ";
+        return position.x() + " " + position.y() + " " + orientation + " ";
     }
 }
